@@ -1,0 +1,67 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3em;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.gameboard {
+    width: 100%;
+    text-align: center;
+    color: #fefefe;
+    padding: 2em;
+    background: url("https://t3.ftcdn.net/jpg/00/97/46/36/360_F_97463619_ZHqQiR70xv5HRiTJlkfyetkzxrmezDtP.jpg") no-repeat;
+    background-size: cover;
+    box-shadow: 0px 0px 10px #0f0f0f;
+    border-radius: 10px;
+    border: 2px solid goldenrod;
+    margin-bottom: 1rem;
+}
+
+.heading{
+    font-size: 4em;
+    color: goldenrod;
+    text-shadow: 2px 2px #0f0f0f;
+    margin-bottom: 1rem;
+}
+ 
+.card-img {
+    width: 20%;
+    border-radius: 11px;
+    box-shadow: 0px 0px 8px goldenrod;
+    margin-bottom: 1rem;
+}
+
+.game-state-msg {
+    font-size: 1.3rem;
+}
+
+.btn {
+    padding: .5em 2em;
+    font-size: 1em;
+    font-weight: 500;
+    background: goldenrod;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin: 1em .5em;
+    transition: transform .5s;
+}
+
+.btn:hover {
+    transform: scale(1.2);
+    color: green;
+}
+
+.hidden {
+    display: none;
+}
