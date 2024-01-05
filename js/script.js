@@ -5,21 +5,19 @@ const newCardBtn = document.querySelector('.new-card-btn');
 const rulesBtn = document.querySelector('.rules-btn');
 const rulesSection = document.querySelector('.rules');
 const cardDeck = [
-    'C1s.png','C2.png','C3.png','C4.png','C5.png','C6.png','C7.png','C8.png','C9.png',
-    'C10.png','C11.png','C12.png','C13.png',
-    'h1.png','h2.png','h3.png','h4.png','h5.png','h6.png','h7.png','h8.png','h9.png',
-    'h10.png','h11.png','h12.png','h13.png',
-    'h1.png','h2.png','h3.png','h4.png','h5.png','h6.png','h7.png','h8.png','h9.png',
-    'h10.png','h11.png','h12.png','h13.png',
-    'p1.png','p2.png','p3.png','p4.png','p5.png','p6.png','p7.png','p8.png','p9.png',
-    'p10.png','p11.png','p12.png','p13.png',
-    't1.png','t2.png','t3.png','t4.png','t5.png','t6.png','t7.png','t8.png','t9.png',
-    't10.png','t11.png','t12.png','t13.png'
+    '1c.png','2c.png','3c.png','4c.png','5c.png','6c.png','7c.png','8c.png','9c.png',
+    '10c.png','11c.png','12c.png','13c.png',
+    '1h.png','2h.png','3h.png','4h.png','5h.png','6h.png','7h.png','8h.png','9h.png',
+    '10h.png','11h.png','12h.png','13h.png',
+    '1p.png','2p.png','3p.png','4p.png','5p.png','6p.png','7p.png','8p.png','9p.png',
+    '10p.png','11p.png','12p.png','13p.png',
+    '1t.png','2t.png','3t.png','4t.png','5t.png','6t.png','7t.png','8t.png','9t.png',
+    '10t.png','11t.png','12t.png','13t.png'
 ];
 let playerCards = [];
-let sum = 0;
 let isPlaying = false;
 let hasBlackJack = false;
+let rulesVisible = false;
 let message = "";
 
 
@@ -28,34 +26,44 @@ newCardBtn.addEventListener('click', drawCard);
 rulesBtn.addEventListener('click', showRules);
 
 function startGame() {
-    playerCards = [cardDeck[getRandomIndex()], cardDeck[getRandomIndex()]];
-    isPlaying = true;
-    for (let i = 0; i < playerCards.length; i++) {
-        createCardElement(playerCards[i]);
-    }
+    if (!isPlaying) {
+        playerCards = [cardDeck[getRandomIndex()], cardDeck[getRandomIndex()]];
+        isPlaying = true;
+        for (let i = 0; i < playerCards.length; i++) {
+            createCardElement(playerCards[i]);
+        }
+        getSum();
+    } 
 }
 
 
-function getCardsValue() {
-    // loop through cars array and extract number value of card (max first two indexes)
-    // if card array index 1 is a number concatenate index 0 and 1 and convert it to number 
-    // if card value is greater than 10 set it equal to 10
-    // if card value is 1 set it equal to 11
-    // add the cards values to sum
-    for (let i = 0; i < cardDeck.length; i++) {
-
+function getSum() {
+    const breakpoint = /[a-z]/;
+    let sum = 0;
+    let arr = [];
+    for (let i = 0; i < playerCards.length; i++) {
+        arr = playerCards[i].split(breakpoint);
+        sum += getCardValue(Number(arr[0]));
+        console.log(getCardValue(arr[0]));
+        console.log(sum)
     }
+    console.log(sum)
 }
 
 function drawCard() {
     playerCards.push(cardDeck[getRandomIndex()]);
     createCardElement(playerCards[playerCards.length -1]);
-    
+    getSum();
 }
 
 function showRules() {
-    rulesSection.classList.remove('hidden');
-    console.log('click')
+    if (!rulesVisible) {
+        rulesSection.classList.remove('hidden');
+        rulesVisible = true;
+    } else {
+        rulesSection.classList.add('hidden');
+        rulesVisible = false;
+    }
 }
 
 function getRandomIndex() {
@@ -68,4 +76,14 @@ function createCardElement(img) {
     card.setAttribute('src', `./img/${img}`);
     card.setAttribute('alt', 'Image of playing card')
     cardsContainer.appendChild(card);
+}
+
+function getCardValue (num) {
+    if (num === 1) {
+        return 11;
+    } if (num > 10) {
+        return 10;
+    } else {
+        return num;
+    }
 }

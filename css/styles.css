@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3em;
+    padding: 20%;
     font-family:'Courier New', Courier, monospace;
 }
 
@@ -61,7 +61,9 @@ body {
     transform: scale(1.2);
     color: green;
 }
-
+.rules {
+    width: 100%;
+}
 .hidden {
     display: none;
 }
