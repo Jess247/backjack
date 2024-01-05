@@ -17,7 +17,6 @@ const cardDeck = [
 let cardSum = 0;
 let playerCards = [];
 let isPlaying = false;
-let hasBlackJack = false;
 let rulesVisible = false;
 let message = "";
 
@@ -92,10 +91,14 @@ function getCardValue (num) {
 
 function checkForWin() {
     if (getSum() === 21) {
-        console.log('blackjack');
+        gameStateMsg.textContent = 'Blackjack!';
+        isPlaying = false;
     } else if (getSum() > 21) {
-        console.log('game over');
+        gameStateMsg.textContent = 'Game over!, Try again!';
+        isPlaying = false;
     } else {
-        console.log('youre still in the game')
+        gameStateMsg.textContent = "Do you want another card?";
     }
 }
+
+// add resetUI function to remove all img tags
