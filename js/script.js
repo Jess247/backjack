@@ -14,6 +14,7 @@ const cardDeck = [
     '1t.png','2t.png','3t.png','4t.png','5t.png','6t.png','7t.png','8t.png','9t.png',
     '10t.png','11t.png','12t.png','13t.png'
 ];
+let cardSum = 0;
 let playerCards = [];
 let isPlaying = false;
 let hasBlackJack = false;
@@ -34,6 +35,7 @@ function startGame() {
         }
         getSum();
     } 
+    checkForWin();
 }
 
 
@@ -44,16 +46,16 @@ function getSum() {
     for (let i = 0; i < playerCards.length; i++) {
         arr = playerCards[i].split(breakpoint);
         sum += getCardValue(Number(arr[0]));
-        console.log(getCardValue(arr[0]));
-        console.log(sum)
     }
-    console.log(sum)
+    console.log(sum);
+    return sum;
 }
 
 function drawCard() {
     playerCards.push(cardDeck[getRandomIndex()]);
     createCardElement(playerCards[playerCards.length -1]);
     getSum();
+    checkForWin();
 }
 
 function showRules() {
@@ -85,5 +87,15 @@ function getCardValue (num) {
         return 10;
     } else {
         return num;
+    }
+}
+
+function checkForWin() {
+    if (getSum() === 21) {
+        console.log('blackjack');
+    } else if (getSum() > 21) {
+        console.log('game over');
+    } else {
+        console.log('youre still in the game')
     }
 }
